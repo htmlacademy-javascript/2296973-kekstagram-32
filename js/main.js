@@ -12,12 +12,10 @@ const NAMES =
   'Ирина'
 ];
 
-
 const MESSAGES = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
-
 
 const DESCRIPTIONS = [
   'Захватывающий закат на пляже, где небо окрашено в потрясающие оттенки оранжевого и розового.',
@@ -26,7 +24,6 @@ const DESCRIPTIONS = [
   'Милый котенок, играющий с клубком пряжи, создающий очаровательное зрелище.',
   'Ночной город с яркими огнями, отражающимися в реке, создавая волшебную атмосферу.'
 ];
-
 
 const SIMILAR_PHOTO_COUNT = 25;
 
@@ -44,30 +41,63 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-
-const getRandomId = getRandomInteger(1, 25);
-
 /**
- * Функция создает массиф объекта фотографии
- * @returns {object} - объект со свойствами: id, url, description, likes
+ * Функция создает случайное уникальное число из диапозона
+ * @param {number} min - миниманьное число
+ * @param {number} max - максимальное число
+ * @returns {number} previousValues - массив уникальных чисел
  */
 
-const createPhoto = () =>  {
-  id: ,
-  url: ,
-  description: ,
-  likes: ,
-  comments: createComment(),
+function createRandomIdFromRangeGenerator (min, max) {
+  const previousValues = [];
+
+  return function () {
+    let currentValue = getRandomInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
 }
 
+const getRandomId = createRandomIdFromRangeGenerator(1, SIMILAR_PHOTO_COUNT);
+const getRandomUrl = createRandomIdFromRangeGenerator(1, SIMILAR_PHOTO_COUNT);
+const getRandomCommentId = createRandomIdFromRangeGenerator(1, SIMILAR_PHOTO_COUNT);
 
 /**
- * Функция создает объект коментария фотографий
- * @returns {object} - объект со свойствами: id, avatar, message, name
+ * Функция выводит случайный элемент из массива
+ * @param {Array} - массив
+ * @returns - элемент массива
  */
-const createComment = () => {
-  id:,
-  avatar:,
-  message:,
-  name:,
+
+function getRandomElementFromArray (element) {
+  return element[getRandomInteger(0, element.length - 1)];
 }
+
+/**
+ * Функция создает массив объекта фотографии
+ * @returns {object} - объект со свойствами: id, url, description, likes, comments
+ */
+
+const createPhoto = () => ({
+  id: getRandomId(),
+  url: `photos/${getRandomUrl()}.jpg`,
+  description: getRandomElementFromArray(DESCRIPTIONS),
+  likes: getRandomInteger(15,200),
+  comments: [
+    {
+      id: getRandomCommentId(),
+      avatar:`img/avatar-${getRandomInteger(1,6)}.svg`,
+      message: getRandomElementFromArray(MESSAGES),
+      name: getRandomElementFromArray(NAMES)
+    }
+  ],
+});
+
+const similarСreatePhoto = Array.from({length: SIMILAR_PHOTO_COUNT}, createPhoto);
+
+console.log(similarСreatePhoto);
