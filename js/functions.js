@@ -19,7 +19,6 @@ getLengthString('проверяемая строка', 10);
  * @param {string} - строка для проверки
  * @returns {boolean}
  */
-
 function isPolydrome(string) {
 
   const cleaned = string.toLowerCase().replaceAll(' ', '');
