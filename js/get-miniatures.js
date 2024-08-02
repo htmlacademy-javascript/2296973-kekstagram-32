@@ -4,7 +4,7 @@ const pictureFragment = document.createDocumentFragment();
 
 /**
  * Фунция добавляет миниатюры в контейнер
- * @param {object} photos - объект случайных фотографий
+ * @param {object} photo - объект случайных фотографий
  * @returns {} - контейнер с миниатюрой
  */
 const appendThunbnail = (photo) => {
