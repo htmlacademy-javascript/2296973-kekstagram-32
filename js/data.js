@@ -1,4 +1,5 @@
 import {getRandomInteger, getRandomElementFromArray, createRandomIdFromRangeGenerator} from './util.js';
+import {appendThunbnail} from './get-miniatures.js';
 
 const NAMES =
 [
@@ -61,5 +62,7 @@ const createPhoto = () => ({
 //  */
 const generatePhotos = () => Array.from({ length: SIMILAR_PHOTO_COUNT }, createPhoto);
 
+
+appendThunbnail(generatePhotos());
 
 export {SIMILAR_PHOTO_COUNT, createComments, createPhoto, generatePhotos};
