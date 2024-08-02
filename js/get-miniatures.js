@@ -3,7 +3,7 @@ const containerPictures = document.querySelector('.pictures');
 const pictureFragment = document.createDocumentFragment();
 
 /**
- * Фунция добавляет миниатюры в контейнер pictures
+ * Фунция добавляет миниатюры в контейнер
  * @param {object} photos - объект случайных фотографий
  * @returns {} - контейнер с миниатюрой
  */
