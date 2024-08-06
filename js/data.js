@@ -1,5 +1,4 @@
 import {getRandomInteger, getRandomElementFromArray, createRandomIdFromRangeGenerator} from './util.js';
-import {appendThunbnail} from './get-miniatures.js';
 
 const NAMES =
 [
@@ -53,16 +52,13 @@ const createPhoto = () => ({
   url: `photos/${getRandomUrl()}.jpg`,
   description: getRandomElementFromArray(DESCRIPTIONS),
   likes: getRandomInteger(15,200),
-  comments: Array.from({length: getRandomInteger(1,10)}, createComments)
+  comments: Array.from({length: getRandomInteger(1,10)}, createComments),
+
 });
 
-/**
 //  * Функция создает массив фотографий из функции createPhotos
 //  * @returns {Array} - новый массив заданное кол-во раз
 //  */
 const generatePhotos = () => Array.from({ length: SIMILAR_PHOTO_COUNT }, createPhoto);
 
-
-appendThunbnail(generatePhotos());
-
-export {SIMILAR_PHOTO_COUNT, createComments, createPhoto, generatePhotos};
+export {SIMILAR_PHOTO_COUNT, generatePhotos};
