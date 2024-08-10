@@ -6,6 +6,8 @@ const containerPictures = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
 const likesCount = document.querySelector('.likes-count');
 const descriptionBigPicture = document.querySelector('.social__caption');
+const blocksCounterComment = bigPicture.querySelector('.social__comment-count');
+const blockLoadingNewComments = bigPicture.querySelector('.comments-loader');
 const buttonReset = bigPicture.querySelector('.big-picture__cancel');
 const bodyElement = document.querySelector('body');
 
@@ -30,11 +32,13 @@ function closeFullPicture() {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-function openFullPicture() {
+function openFullPicture(data) {
   bodyElement.classList.add('open');
   bigPicture.classList.remove('hidden');
+  blocksCounterComment.classList.add('hidden');
+  blockLoadingNewComments.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
-  renderDataForPicture();
+  renderDataForPicture(data);
 }
 
 containerPictures.addEventListener('keydown', (evt) => {
@@ -54,7 +58,8 @@ const renderGallery = (pictures) => {
       return;
     }
     const chosenImgElement = isClickOnPicture.querySelector('img');
-    const chosenPicture = pictures.find((picture) => picture.id === Number(chosenImgElement.dataset.id));
+    const chosenPictureId = Number(chosenImgElement.dataset.photoId);
+    const chosenPicture = pictures.find((picture) => picture.id === chosenPictureId);
     openFullPicture(chosenPicture);
   });
   appendThunbnails(pictures, containerPictures);
