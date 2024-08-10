@@ -58,6 +58,6 @@ const createPhoto = () => ({
 //  * Функция создает массив фотографий из функции createPhotos
 //  * @returns {Array} - новый массив заданное кол-во раз
 //  */
-const generatePhotos = () => Array.from({ length: SIMILAR_PHOTO_COUNT,}, createPhoto);
+const generatePhotos = () => Array.from({ length: SIMILAR_PHOTO_COUNT }, createPhoto);
 
 export {SIMILAR_PHOTO_COUNT, generatePhotos};
