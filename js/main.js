@@ -4,5 +4,3 @@ import {renderGallery} from './image-modal.js';
 
 
 renderGallery(generatePhotos());
-
-export {generatePhotos};
