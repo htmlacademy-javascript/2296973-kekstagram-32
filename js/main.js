@@ -1,6 +1,8 @@
 import {generatePhotos} from './data.js';
-// import {appendThunbnails} from './get-miniatures.js';
 import {renderGallery} from './image-modal.js';
-
+import { closeUploadForm} from './form.js';
+closeUploadForm();
 
 renderGallery(generatePhotos());
+
+
